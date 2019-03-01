@@ -34,3 +34,5 @@ frappe.ui.form.on('Sprint', 'onload', function(frm) {
     })
 });
 
+cur_frm.get_field("project_task").grid.cannot_add_rows = true;
+

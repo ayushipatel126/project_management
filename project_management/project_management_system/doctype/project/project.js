@@ -1,11 +1,9 @@
 // Copyright (c) 2019, Ayushi Patel and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on('Project', {
-	refresh: function(frm) {
+cur_frm.get_field("sprints").grid.cannot_add_rows = true;
 
-	}
-});
+cur_frm.get_field("tasks").grid.cannot_add_rows = true;
 
 frappe.ui.form.on('Project', 'onload', function(frm) {
      
