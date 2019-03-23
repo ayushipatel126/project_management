@@ -6,3 +6,16 @@ frappe.ui.form.on('Task', {
 
 	}
 });
+
+frappe.ui.form.on("Task", "setup", function(frm) {
+    cur_frm.set_query("task_dependent_on", function(frm) {
+        return {
+            "filters": [
+                ["Task", "project", "=", cur_frm.doc.project],
+                ["Task", "task_name", "!=", cur_frm.doc.task_name]
+            ]
+        };
+    });
+});
+
+
