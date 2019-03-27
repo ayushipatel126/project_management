@@ -19,7 +19,7 @@ class Task(Document):
 		#total = frappe.db.sql("""select count(task_name) from tabTask where project=%s""", self.name)[0][0]
 		task_list = frappe.get_all('Task',filters={'project':self.project},fields=['*'])		
 		project = frappe.get_doc('Project', self.project)
-		if task_list == None:
+		if len(task_list) == 0 :
 			project.project_completion_percentage = 0
 		else:
 			total_weight = 0
@@ -28,7 +28,10 @@ class Task(Document):
 				total_weight += task.task_progress
 				if task.task_status == "Complete":
 					completed_task_weight += task.task_progress
-			project.project_completion_percentage = (completed_task_weight * 100)/ total_weight
+			if total_weight:
+				project.project_completion_percentage = (completed_task_weight * 100)/ total_weight
+			else:
+				project.project_completion_percentage = 0
 			project.save()
 	
 	def validate_task_dependency(self):
