@@ -19,7 +19,7 @@ frappe.ui.form.on('Project', 'onload', function(frm) {
 				var child = frm.add_child("tasks");
 			    frappe.model.set_value(child.doctype, child.name, "task_id", r.message[i].name);
 				frappe.model.set_value(child.doctype, child.name, "task_name", r.message[i].task_name);
- 				frappe.model.set_value(child.doctype, child.name, "task_status", r.message[i].task_status);
+ 				frappe.model.set_value(child.doctype, child.name, "task_status", r.message[i].status);
 				frappe.model.set_value(child.doctype, child.name, "priority", r.message[i].priority);
 				frappe.model.set_value(child.doctype, child.name, "estimated_start_date", r.message[i].estimated_start_date);
 				frappe.model.set_value(child.doctype, child.name, "time", r.message[i].time);

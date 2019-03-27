@@ -26,7 +26,7 @@ class Task(Document):
 			completed_task_weight = 0
 			for task in task_list:
 				total_weight += task.task_progress
-				if task.task_status == "Complete":
+				if task.status == "Complete":
 					completed_task_weight += task.task_progress
 			if total_weight:
 				project.project_completion_percentage = (completed_task_weight * 100)/ total_weight
@@ -35,9 +35,9 @@ class Task(Document):
 			project.save()
 	
 	def validate_task_dependency(self):
-		if not self.task_dependent_on == None and self.task_status.upper()=="IN PROGRESS":
+		if not self.task_dependent_on == None and self.status.upper()=="IN PROGRESS":
 			depedant_task=frappe.get_doc("Task",self.task_dependent_on)
-			if not depedant_task.task_status == "Complete":
+			if not depedant_task.status == "Complete":
 				frappe.throw("Task is dependent on another task. You have to complete it first.")
 
 	def validate_weights(self):
